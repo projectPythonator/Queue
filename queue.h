@@ -8,13 +8,16 @@ class Queue
 	private:
 		int MAX_SIZE;
 		int counter;
-		int array[];
+		int* array;
 
 	public:
 		Queue();
+		Queue(int);
 		~Queue();
 		void enqueue(int);
-		int dequeue(int);
+		int dequeue();
 		int size(); 
 
-}
+};
+
+#endif
