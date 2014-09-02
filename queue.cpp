@@ -41,9 +41,13 @@ Queue::~Queue()
 void Queue::enqueue(int num)
 {
 	array[tail] = num;
-	
+
 	counter++;
-	tail++;
+
+	if (tail < MAX_SIZE)
+		tail++;
+	else
+		tail = 0;
 }
 
 
@@ -52,8 +56,12 @@ int Queue::dequeue()
 	int num = array[head];
 	
 	counter--;
-	head++;
-	
+
+	if (head < MAX_SIZE)
+		head++;
+	else
+		head = 0;
+		
 	return num;
 }
 
@@ -65,16 +73,30 @@ int Queue::size()
 
 void Queue::test()
 {
-	for(int i = 0; i < this->MAX_SIZE; i++)
+	for(int i = 0; i < MAX_SIZE - 1; i++)
 	{
 		this->enqueue(i);
 		std::cout << i << " ";
 	}
 	std::cout << "\n";
 	
-	for(int i = 0; i < this->MAX_SIZE; i++)
+	for(int i = 0; i < MAX_SIZE - 2; i++)
 	{
 		std::cout << this->dequeue() << " ";
 	}
 	std::cout << "\n";
+
+	for (int i = 0; i < MAX_SIZE - 1; i++)
+	{
+		int enq = 10*i;
+		this->enqueue(enq);
+		std::cout << enq << " ";
+	}
+	std::cout << "\n";
+
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		std::cout << this->dequeue() << " ";
+	}
+	std::cout << "\n"; 
 }
