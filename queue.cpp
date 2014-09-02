@@ -6,6 +6,7 @@
  *	Author: Edward Ruzek	Sep 1, 2014
  */
 #include <iostream>
+
 #include "queue.h"
 
 /**
@@ -17,9 +18,9 @@ Queue::Queue()
 	MAX_SIZE = 10;
 	array = new int[MAX_SIZE];
 
-	counter = 0;
 	head = 0;
 	tail = 0;
+	isFull = false;
 }
 
 Queue::Queue(int size)
@@ -27,9 +28,9 @@ Queue::Queue(int size)
 	MAX_SIZE = size;
 	array = new int[MAX_SIZE];
 
-	counter = 0;
 	head = 0;
 	tail = 0;
+	isFull = false;
 }
 
 
@@ -42,47 +43,58 @@ void Queue::enqueue(int num)
 {
 	array[tail] = num;
 
-	counter++;
-
-	if (tail < MAX_SIZE)
+	if (tail < MAX_SIZE - 1)
 		tail++;
 	else
 		tail = 0;
+
+	if (head == tail)
+		isFull = true;
 }
 
 
 int Queue::dequeue()
 {
 	int num = array[head];
-	
-	counter--;
 
-	if (head < MAX_SIZE)
+	if (head < MAX_SIZE - 1)
 		head++;
 	else
 		head = 0;
-		
+
+	if (head == tail)
+		isFull = false;
+
 	return num;
 }
 
 int Queue::size()
 {
-	return counter;
+	if (tail > head)
+		return (tail - head);
+	else if (tail < head)
+		return (MAX_SIZE - (head - tail));
+	else if (isFull)
+		return MAX_SIZE;
+	else
+		return 0;
 }
 
 
 void Queue::test()
 {
 	for(int i = 0; i < MAX_SIZE - 1; i++)
-	{
-		this->enqueue(i);
-		std::cout << i << " ";
+	{	
+		int enq = i;
+		this->enqueue(enq);
+		std::cout << enq << ":" << this->size() << " ";
 	}
 	std::cout << "\n";
 	
 	for(int i = 0; i < MAX_SIZE - 2; i++)
 	{
-		std::cout << this->dequeue() << " ";
+		int deq = this->dequeue();
+		std::cout << deq << ":" << this->size() << " ";
 	}
 	std::cout << "\n";
 
@@ -90,13 +102,14 @@ void Queue::test()
 	{
 		int enq = 10*i;
 		this->enqueue(enq);
-		std::cout << enq << " ";
+		std::cout << enq << ":" << this->size() << " ";
 	}
 	std::cout << "\n";
 
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
-		std::cout << this->dequeue() << " ";
+		int deq = this->dequeue();
+		std::cout << deq << ":" << this->size() << " ";
 	}
 	std::cout << "\n"; 
 }

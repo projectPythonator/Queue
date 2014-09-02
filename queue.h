@@ -9,9 +9,9 @@ class Queue
 		int MAX_SIZE;
 		int* array;
 
-		int counter;
 		int head;
 		int tail;
+		bool isFull;
 
 	public:
 		Queue();
