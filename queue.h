@@ -7,8 +7,11 @@ class Queue
 {
 	private:
 		int MAX_SIZE;
-		int counter;
 		int* array;
+
+		int counter;
+		int head;
+		int tail;
 
 	public:
 		Queue();
@@ -17,6 +20,8 @@ class Queue
 		void enqueue(int);
 		int dequeue();
 		int size(); 
+
+		void test();
 
 };
 

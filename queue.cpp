@@ -5,7 +5,7 @@
  *
  *	Author: Edward Ruzek	Sep 1, 2014
  */
-
+#include <iostream>
 #include "queue.h"
 
 /**
@@ -15,15 +15,21 @@
 Queue::Queue()
 {
 	MAX_SIZE = 10;
-	counter = 0;
 	array = new int[MAX_SIZE];
+
+	counter = 0;
+	head = 0;
+	tail = 0;
 }
 
 Queue::Queue(int size)
 {
 	MAX_SIZE = size;
-	counter = 0;
 	array = new int[MAX_SIZE];
+
+	counter = 0;
+	head = 0;
+	tail = 0;
 }
 
 
@@ -34,20 +40,38 @@ Queue::~Queue()
 
 void Queue::enqueue(int num)
 {
-	array[counter] = num;
+	array[tail] = num;
+	
 	counter++;
+	tail++;
 }
 
 
 int Queue::dequeue()
 {
+	int num = array[head];
+
 	counter--;
+	head++;
 	
-	int num = array[counter];
 	return num;
 }
 
 int Queue::size()
 {
 	return counter;
+}
+
+
+void Queue::test()
+{
+	for(int i = 0; i < this->MAX_SIZE; i++)
+	{
+		this->enqueue(i);
+	}
+
+	for(int i = 0; i < this->MAX_SIZE; i++)
+	{
+		std::cout << this->dequeue() << "\n";
+	}
 }
