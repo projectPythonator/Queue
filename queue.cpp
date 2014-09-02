@@ -6,6 +6,7 @@
  *	Author: Edward Ruzek	Sep 1, 2014
  */
 #include <iostream>
+#include <assert.h>
 
 #include "queue.h"
 
@@ -42,7 +43,7 @@ Queue::~Queue()
 void Queue::enqueue(int num)
 {
 	if (isFull && size() == MAX_SIZE)
-		resize(MAX_SIZE + 10);
+		resize(2 * MAX_SIZE);
 
 	array[tail] = num;
 
@@ -58,6 +59,11 @@ void Queue::enqueue(int num)
 
 int Queue::dequeue()
 {
+	assert(head != tail && !isFull && "dequeue from an empty array");
+
+	if (size() == MAX_SIZE/4)
+		resize(MAX_SIZE/2);
+	
 	int num = array[head];
 
 	if (head < MAX_SIZE - 1)
@@ -87,7 +93,7 @@ void Queue::resize(int num_size)
 {
 	int* temp = new int[num_size];
 
-	for (int i = 0; i < MAX_SIZE; i++)
+	for (int i = 0; i < size(); i++)
 	{
 		int idx = (i + head) % MAX_SIZE;
 		temp[idx] = array[i];
@@ -97,7 +103,7 @@ void Queue::resize(int num_size)
 	array = temp;
 
 	head = 0;
-	tail = MAX_SIZE;
+	tail = size();
 	MAX_SIZE = num_size;
 	isFull = false;
 }
@@ -121,7 +127,18 @@ void Queue::test()
 		enqueue(i);
 	}
 
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 20; i++)
+	{
+		std::cout << dequeue() << " ";
+	}
+	std::cout << "\n\n";
+
+	for (int i = 0; i < 10; i++)
+	{
+		enqueue(i);
+	}
+
+	for (int i = 0; i < 20; i++)
 	{
 		std::cout << dequeue() << " ";
 	}
