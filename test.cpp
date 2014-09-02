@@ -4,18 +4,15 @@
  *	Test program for the queue data structure
  */
 
-
-
-#include <iostream>
+#include <stdlib.h>
 #include "queue.h"
 
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-	Queue q;
+	Queue q( atoi( argv[0] ) );
 
 	q.test();
-
-
+	
 	return 0;
 }	
