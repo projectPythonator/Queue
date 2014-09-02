@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[])
 {
-	Queue q( atoi( argv[0] ) );
+	Queue q( atoi( argv[1] ) );
 
 	q.test();
 	

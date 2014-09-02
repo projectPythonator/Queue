@@ -50,7 +50,7 @@ void Queue::enqueue(int num)
 int Queue::dequeue()
 {
 	int num = array[head];
-
+	
 	counter--;
 	head++;
 	
@@ -68,10 +68,13 @@ void Queue::test()
 	for(int i = 0; i < this->MAX_SIZE; i++)
 	{
 		this->enqueue(i);
+		std::cout << i << " ";
 	}
-
+	std::cout << "\n";
+	
 	for(int i = 0; i < this->MAX_SIZE; i++)
 	{
-		std::cout << this->dequeue() << "\n";
+		std::cout << this->dequeue() << " ";
 	}
+	std::cout << "\n";
 }
