@@ -36,11 +36,14 @@ Queue::Queue(int size)
 
 Queue::~Queue()
 {
-	delete array;
+	delete[] array;
 }
 
 void Queue::enqueue(int num)
 {
+	if (isFull && size() == MAX_SIZE)
+		resize(MAX_SIZE + 10);
+
 	array[tail] = num;
 
 	if (tail < MAX_SIZE - 1)
@@ -80,36 +83,47 @@ int Queue::size()
 		return 0;
 }
 
-
-void Queue::test()
+void Queue::resize(int num_size)
 {
-	for(int i = 0; i < MAX_SIZE - 1; i++)
-	{	
-		int enq = i;
-		this->enqueue(enq);
-		std::cout << enq << ":" << this->size() << " ";
-	}
-	std::cout << "\n";
-	
-	for(int i = 0; i < MAX_SIZE - 2; i++)
-	{
-		int deq = this->dequeue();
-		std::cout << deq << ":" << this->size() << " ";
-	}
-	std::cout << "\n";
-
-	for (int i = 0; i < MAX_SIZE - 1; i++)
-	{
-		int enq = 10*i;
-		this->enqueue(enq);
-		std::cout << enq << ":" << this->size() << " ";
-	}
-	std::cout << "\n";
+	int* temp = new int[num_size];
 
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
-		int deq = this->dequeue();
-		std::cout << deq << ":" << this->size() << " ";
+		int idx = (i + head) % MAX_SIZE;
+		temp[idx] = array[i];
 	}
-	std::cout << "\n"; 
+
+	delete[] array;
+	array = temp;
+
+	head = 0;
+	tail = MAX_SIZE;
+	MAX_SIZE = num_size;
+	isFull = false;
+}
+
+
+void Queue::test()
+{
+	for (int i = 0; i < 45; i++)
+	{
+		enqueue(i);
+	}
+
+	for (int i = 0; i < 30; i++)
+	{
+		std::cout << dequeue() << " ";
+	}
+	std::cout << "\n\n";
+
+	for (int i = 0; i < 15; i++)
+	{
+		enqueue(i);
+	}
+
+	for (int i = 0; i < 30; i++)
+	{
+		std::cout << dequeue() << " ";
+	}
+	std::cout << "\n\n";
 }

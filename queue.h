@@ -20,6 +20,7 @@ class Queue
 		void enqueue(int);
 		int dequeue();
 		int size(); 
+		void resize(int);
 
 		void test();
 
