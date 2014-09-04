@@ -58,8 +58,8 @@ void Queue::enqueue(int num)
 
 
 int Queue::dequeue()
-{
-	assert(head != tail && !isFull && "dequeue from an empty array");
+{ 
+	//assert(head != tail && !isFull && "dequeue from an empty array");
 
 	if (size() == MAX_SIZE/4)
 		resize(MAX_SIZE/2);
@@ -96,7 +96,7 @@ void Queue::resize(int num_size)
 	for (int i = 0; i < size(); i++)
 	{
 		int idx = (i + head) % MAX_SIZE;
-		temp[idx] = array[i];
+		temp[i] = array[idx];
 	}
 
 	delete[] array;
