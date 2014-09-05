@@ -47,10 +47,7 @@ void Queue::enqueue(int num)
 
 	array[tail] = num;
 
-	if (tail < MAX_SIZE - 1)
-		tail++;
-	else
-		tail = 0;
+	++tail % MAX_SIZE;
 
 	if (head == tail)
 		isFull = true;
@@ -66,10 +63,7 @@ int Queue::dequeue()
 	
 	int num = array[head];
 
-	if (head < MAX_SIZE - 1)
-		head++;
-	else
-		head = 0;
+	++head % MAX_SIZE;
 
 	if (head == tail)
 		isFull = false;
