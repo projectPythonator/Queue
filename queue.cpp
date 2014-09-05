@@ -111,34 +111,23 @@ void Queue::resize(int num_size)
 
 void Queue::test()
 {
-	for (int i = 0; i < 45; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		enqueue(i);
 	}
 
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		std::cout << dequeue() << " ";
 	}
 	std::cout << "\n\n";
 
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		enqueue(i);
 	}
 
-	for (int i = 0; i < 20; i++)
-	{
-		std::cout << dequeue() << " ";
-	}
-	std::cout << "\n\n";
-
-	for (int i = 0; i < 10; i++)
-	{
-		enqueue(i);
-	}
-
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		std::cout << dequeue() << " ";
 	}
