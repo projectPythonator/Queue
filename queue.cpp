@@ -47,7 +47,7 @@ void Queue::enqueue(int num)
 
 	array[tail] = num;
 
-	++tail % MAX_SIZE;
+	++tail %= MAX_SIZE;
 
 	if (head == tail)
 		isFull = true;
@@ -63,7 +63,7 @@ int Queue::dequeue()
 	
 	int num = array[head];
 
-	++head % MAX_SIZE;
+	++head %= MAX_SIZE;
 
 	if (head == tail)
 		isFull = false;
@@ -96,8 +96,8 @@ void Queue::resize(int num_size)
 	delete[] array;
 	array = temp;
 
-	head = 0;
 	tail = size();
+	head = 0;
 	MAX_SIZE = num_size;
 	isFull = false;
 }
@@ -105,23 +105,23 @@ void Queue::resize(int num_size)
 
 void Queue::test()
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 450; i++)
 	{
 		enqueue(i);
 	}
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 400; i++)
 	{
 		std::cout << dequeue() << " ";
 	}
 	std::cout << "\n\n";
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 350; i++)
 	{
 		enqueue(i);
 	}
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 400; i++)
 	{
 		std::cout << dequeue() << " ";
 	}
